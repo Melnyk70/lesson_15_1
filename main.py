@@ -1,16 +1,40 @@
-# This is a sample Python script.
+class Rectangle:
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+    def __init__(self, width, height):  # Конструктор класу, ініціалізує ширину та висоту прямокутника
+        self.width = width  # Встановлює ширину прямокутника
+        self.height = height  # Встановлює висоту прямокутника
+
+    def get_square(self):  # Метод для обчислення площі прямокутника
+        return self.width * self.height  # Повертає площу прямокутника
+
+    def __eq__(self, other):  # Перевизначення методу порівняння прямокутників за площею
+        return self.get_square() == other.get_square()  # Порівнює площі двох прямокутників
+
+    def __add__(self, other):  # Перевизначення методу додавання прямокутників
+        new_square = self.get_square() + other.get_square()  # Обчислює нову площу як суму площ двох прямокутників
+        new_width = 1  # Встановлює нову ширину
+        new_height = new_square  # Встановлює нову висоту, щоб площа дорівнювала новій площі
+        return Rectangle(new_width, new_height)  # Повертає новий екземпляр класу Rectangle
+
+    def __mul__(self, n):  # Перевизначення методу множення прямокутника на число n
+        new_square = self.get_square() * n  # Обчислює нову площу як добуток площі прямокутника та числа n
+        new_width = 1  # Встановлює нову ширину
+        new_height = new_square  # Встановлює нову висоту, щоб площа дорівнювала новій площі
+        return Rectangle(new_width, new_height)  # Повертає новий екземпляр класу Rectangle
+
+    def __str__(self):  # Перевизначення методу для рядкового представлення об'єкта
+        return f"Rectangle(width={self.width}, height={self.height})"  # Повертає рядкове представлення прямокутника
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+r1 = Rectangle(2, 4)  # Створює екземпляр прямокутника з шириною 2 і висотою 4
+r2 = Rectangle(3, 6)  # Створює екземпляр прямокутника з шириною 3 і висотою 6
+assert r1.get_square() == 8, 'Test1'  # Перевіряє, чи площа r1 дорівнює 8
+assert r2.get_square() == 18, 'Test2'  # Перевіряє, чи площа r2 дорівнює 18
 
+r3 = r1 + r2  # Додає два прямокутники, отримуючи новий прямокутник
+assert r3.get_square() == 26, 'Test3'  # Перевіряє, чи площа нового прямокутника дорівнює 26
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+r4 = r1 * 4  # Множить прямокутник r1 на 4, отримуючи новий прямокутник
+assert r4.get_square() == 32, 'Test4'  # Перевіряє, чи площа нового прямокутника дорівнює 32
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+assert Rectangle(3, 6) == Rectangle(2, 9), 'Test5'  # Перевіряє, чи прямокутники з площами 18 і 18 рівні
